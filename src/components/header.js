@@ -1,25 +1,19 @@
 import React from 'react';
-
 import {
   HeaderNavigation,
   ALIGN,
   StyledNavigationItem as NavigationItem,
   StyledNavigationList as NavigationList,
 } from 'baseui/header-navigation';
-
-import { Block } from 'baseui/block';
-
-import { styled } from 'baseui';
 import { Button } from 'baseui/button';
-import { Link as GatsbyLink } from 'gatsby';
-const Link = styled(GatsbyLink, {
-  textDecoration: 'none',
-  fontWeight: 'bold',
-  color: '#ccc',
-  ':hover': {
-    color: '#666',
-  },
-});
+
+import Link from './link';
+
+const links = [
+  { to: '/', title: 'Home' },
+  { to: '/about', title: 'About' },
+  { to: '/contact', title: 'Contact' },
+];
 
 const Header = () => (
   <HeaderNavigation $style={{ paddingRight: '15px' }}>
@@ -28,27 +22,30 @@ const Header = () => (
     </NavigationList>
     <NavigationList align={ALIGN.center} />
     <NavigationList align={ALIGN.right}>
-      <NavigationItem>
-        <Link to="/" activeStyle={{ color: '#333' }}>
-          Home
-        </Link>
-      </NavigationItem>
-      <NavigationItem>
-        <Link to="/about" activeStyle={{ color: '#333' }}>
-          About
-        </Link>
-      </NavigationItem>
-      <NavigationItem>
-        <Link to="/contact" activeStyle={{ color: '#333' }}>
-          Contact
-        </Link>
-      </NavigationItem>
+      {links.map(link => (
+        <NavigationItem key={link.to}>
+          <Link
+            $style={{
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              color: '#ccc',
+              ':hover': {
+                color: '#666',
+              },
+            }}
+            to={link.to}
+            activeStyle={{ color: '#333' }}
+          >
+            {link.title}
+          </Link>
+        </NavigationItem>
+      ))}
     </NavigationList>
     <NavigationList align={ALIGN.right}>
       <NavigationItem>
-        <a href="https://google.com">
+        <Link to="https://google.com" $style={{ textDecoration: 'none' }}>
           <Button>Get started</Button>
-        </a>
+        </Link>
       </NavigationItem>
     </NavigationList>
   </HeaderNavigation>
