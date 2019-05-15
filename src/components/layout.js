@@ -6,12 +6,10 @@ import Header from './Header';
 
 const Layout = props => {
   return (
-    <React.Fragment>
+    <>
       <Header />
-      <Block width="800px" margin="0 auto">
-        {props.children}
-      </Block>
-    </React.Fragment>
+      <Block>{props.children}</Block>
+    </>
   );
 };
 
